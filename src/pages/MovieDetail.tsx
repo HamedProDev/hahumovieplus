@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Star, Clock, Calendar, Play, Plus, Check } from "lucide-react";
 import { tmdb, getBackdropUrl, getPosterUrl } from "@/lib/tmdb";
@@ -13,18 +13,28 @@ import { useState, useEffect } from "react";
 
 export default function MovieDetail() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
   const [inWatchlist, setInWatchlist] = useState(false);
   const [showPlayer, setShowPlayer] = useState(false);
 
-  const movieId = id ? parseInt(id, 10) : null;
-  const isValidId = movieId !== null && !isNaN(movieId) && movieId > 0;
+  // Parse and validate the movie ID
+  const movieId = id && /^\d+$/.test(id) ? parseInt(id, 10) : null;
+  const isValidId = movieId !== null && movieId > 0;
+
+  // Redirect to home if invalid ID
+  useEffect(() => {
+    if (id && !isValidId) {
+      navigate("/", { replace: true });
+    }
+  }, [id, isValidId, navigate]);
 
   const { data: movie, isLoading, error } = useQuery({
     queryKey: ["movie", movieId],
     queryFn: () => tmdb.getMovie(movieId!),
     enabled: isValidId,
+    retry: 1,
   });
 
   useEffect(() => {
