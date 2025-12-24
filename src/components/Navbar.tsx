@@ -158,13 +158,14 @@ export function Navbar() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <div className="hidden lg:flex items-center gap-2">
+              <div className="hidden lg:flex items-center gap-2"> {/*
                 <Button variant="ghost" asChild>
                   <Link to="/auth">Sign In</Link>
-                </Button>
+                </Button> */}
+                <h1>Developed by <a href="https://hahupro.vercel.app" target="_blank" style={{textDecoration:'underline'}}>Hamed Hussein</a></h1>
                 <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-                  <Link to="/auth">Sign In</Link>
-                </Button>
+                  <Link to="/auth">Sign Up</Link>
+                </Button> 
               </div>
             )}
 

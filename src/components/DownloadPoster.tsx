@@ -100,7 +100,7 @@ export function DownloadPoster({ posterUrl, title }: DownloadPosterProps) {
       className="bg-white/10 hover:bg-white/20"
     >
       <Download className="h-5 w-5 mr-2" />
-      Download Poster
+      Download
     </Button>
   );
 }

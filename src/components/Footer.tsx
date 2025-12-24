@@ -91,15 +91,15 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4 text-primary" />
-                Addis Ababa, Ethiopia
+                Kigali, Rwanda
               </li>
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4 text-primary" />
-                +251 911 123 456
+                +250 952 037 26(whatsapp only)
               </li>
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4 text-primary" />
-                info@hahumovie.com
+                hamedhussein001@gmail.com
               </li>
             </ul>
           </div>
@@ -108,7 +108,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} HAHU Movie Plus. All rights reserved.
+            © {new Date().getFullYear()} HAHU Movie Plus. <a href="https://hahupro.vercel.app" target="_blank" style={{textDecoration:'underline'}}>Hamed Hussein</a>
           </p>
           <div className="flex items-center gap-6">
             <Link to="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">
