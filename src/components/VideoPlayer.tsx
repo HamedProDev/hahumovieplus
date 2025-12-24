@@ -93,15 +93,15 @@ export function VideoPlayer({ videoKey, title, thumbnailUrl }: VideoPlayerProps)
   );
 }
 
-// Component for playing full movie (placeholder URLs for now)
+// Component for playing full movie using vidsrc.xyz
 export function MovieStreamPlayer({ movieId, title }: { movieId: number; title: string }) {
   const [isPlaying, setIsPlaying] = useState(false);
 
-  // Placeholder video URL - in production, this would be your actual video source
-  const placeholderVideoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+  // Use vidsrc.xyz embed - a free movie streaming embed service
+  const embedUrl = `https://vidsrc.xyz/embed/movie/${movieId}`;
 
   return (
-    <div className="video-player-container">
+    <div className="video-player-container relative aspect-video bg-cinema-gray rounded-xl overflow-hidden">
       {!isPlaying ? (
         <div
           onClick={() => setIsPlaying(true)}
@@ -112,18 +112,17 @@ export function MovieStreamPlayer({ movieId, title }: { movieId: number; title: 
               <Play className="h-10 w-10 text-primary-foreground fill-current ml-1" />
             </div>
             <h3 className="text-xl font-display font-semibold mb-2">{title}</h3>
-            <p className="text-muted-foreground text-sm">Click to play demo video</p>
+            <p className="text-muted-foreground text-sm">Click to play movie</p>
           </div>
         </div>
       ) : (
-        <video
-          src={placeholderVideoUrl}
-          controls
-          autoPlay
-          className="w-full h-full"
-        >
-          Your browser does not support the video tag.
-        </video>
+        <iframe
+          src={embedUrl}
+          title={title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+          allowFullScreen
+          className="w-full h-full border-0"
+        />
       )}
     </div>
   );
