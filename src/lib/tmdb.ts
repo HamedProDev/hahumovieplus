@@ -1,5 +1,3 @@
-import { supabase } from "@/integrations/supabase/client";
-
 export const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p";
 
 export interface Movie {
@@ -51,15 +49,10 @@ export const getBackdropUrl = (path: string | null, size: "w780" | "w1280" | "or
 async function callTmdbApi(endpoint: string, params: Record<string, string> = {}) {
   const searchParams = new URLSearchParams({ endpoint, ...params });
   
-  const { data, error } = await supabase.functions.invoke("tmdb", {
-    body: null,
-    headers: {},
-  });
-
-  // Use fetch directly for GET with query params
   const response = await fetch(
     `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/tmdb?${searchParams.toString()}`,
     {
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
       },
