@@ -6,6 +6,7 @@ import { Layout } from "@/components/Layout";
 import { VideoPlayer, MovieStreamPlayer } from "@/components/VideoPlayer";
 import { MovieRow } from "@/components/MovieRow";
 import { Button } from "@/components/ui/button";
+import { DownloadPoster } from "@/components/DownloadPoster";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -128,6 +129,10 @@ export default function MovieDetail() {
                     {inWatchlist ? "In Watchlist" : "Add to List"}
                   </Button>
                 )}
+                <DownloadPoster 
+                  posterUrl={getPosterUrl(movie.poster_path, "original")} 
+                  title={movie.title} 
+                />
               </div>
             </div>
           </div>
