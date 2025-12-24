@@ -93,12 +93,24 @@ export function VideoPlayer({ videoKey, title, thumbnailUrl }: VideoPlayerProps)
   );
 }
 
-// Component for playing full movie using vidsrc.xyz
+// Component for playing full movie using multiple embed sources with fallback
 export function MovieStreamPlayer({ movieId, title }: { movieId: number; title: string }) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentSource, setCurrentSource] = useState(0);
 
-  // Use vidsrc.xyz embed - a free movie streaming embed service
-  const embedUrl = `https://vidsrc.xyz/embed/movie/${movieId}`;
+  // Multiple embed sources with fallbacks
+  const embedSources = [
+    `https://vidsrc.to/embed/movie/${movieId}`,
+    `https://vidsrc.me/embed/movie?tmdb=${movieId}`,
+    `https://www.2embed.cc/embed/${movieId}`,
+    `https://multiembed.mov/?video_id=${movieId}&tmdb=1`,
+  ];
+
+  const handleSourceError = () => {
+    if (currentSource < embedSources.length - 1) {
+      setCurrentSource(currentSource + 1);
+    }
+  };
 
   return (
     <div className="video-player-container relative aspect-video bg-cinema-gray rounded-xl overflow-hidden">
@@ -116,13 +128,27 @@ export function MovieStreamPlayer({ movieId, title }: { movieId: number; title: 
           </div>
         </div>
       ) : (
-        <iframe
-          src={embedUrl}
-          title={title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-          allowFullScreen
-          className="w-full h-full border-0"
-        />
+        <div className="relative w-full h-full">
+          <iframe
+            key={currentSource}
+            src={embedSources[currentSource]}
+            title={title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+            allowFullScreen
+            className="w-full h-full border-0"
+            onError={handleSourceError}
+          />
+          {embedSources.length > 1 && (
+            <div className="absolute bottom-4 right-4 flex gap-2">
+              <button
+                onClick={() => setCurrentSource((prev) => (prev + 1) % embedSources.length)}
+                className="px-3 py-1 bg-black/70 hover:bg-black/90 text-white text-xs rounded-full transition-colors"
+              >
+                Try different source ({currentSource + 1}/{embedSources.length})
+              </button>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );
