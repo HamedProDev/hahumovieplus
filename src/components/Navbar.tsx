@@ -39,8 +39,12 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <span className="text-2xl lg:text-3xl font-display font-bold text-gradient-gold">
-              HahuMovie+
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+              <span className="text-primary-foreground font-bold text-sm">▶</span>
+            </div>
+            <span className="text-xl lg:text-2xl font-display font-bold">
+              <span className="text-foreground">HAHU</span>
+              <span className="text-gradient-purple">Movie+</span>
             </span>
           </Link>
 
@@ -158,8 +162,8 @@ export function Navbar() {
                 <Button variant="ghost" asChild>
                   <Link to="/auth">Sign In</Link>
                 </Button>
-                <Button asChild className="bg-gradient-gold text-primary-foreground hover:opacity-90">
-                  <Link to="/auth?mode=signup">Sign Up</Link>
+                <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+                  <Link to="/auth">Sign In</Link>
                 </Button>
               </div>
             )}
@@ -217,9 +221,9 @@ export function Navbar() {
                       Sign In
                     </Link>
                   </Button>
-                  <Button asChild className="flex-1 bg-gradient-gold text-primary-foreground">
-                    <Link to="/auth?mode=signup" onClick={() => setIsMobileMenuOpen(false)}>
-                      Sign Up
+                  <Button asChild className="flex-1 bg-primary text-primary-foreground">
+                    <Link to="/auth" onClick={() => setIsMobileMenuOpen(false)}>
+                      Sign In
                     </Link>
                   </Button>
                 </div>
