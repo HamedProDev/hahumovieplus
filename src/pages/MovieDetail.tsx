@@ -18,10 +18,13 @@ export default function MovieDetail() {
   const [inWatchlist, setInWatchlist] = useState(false);
   const [showPlayer, setShowPlayer] = useState(false);
 
-  const { data: movie, isLoading } = useQuery({
-    queryKey: ["movie", id],
-    queryFn: () => tmdb.getMovie(Number(id)),
-    enabled: !!id,
+  const movieId = id ? parseInt(id, 10) : null;
+  const isValidId = movieId !== null && !isNaN(movieId) && movieId > 0;
+
+  const { data: movie, isLoading, error } = useQuery({
+    queryKey: ["movie", movieId],
+    queryFn: () => tmdb.getMovie(movieId!),
+    enabled: isValidId,
   });
 
   useEffect(() => {
@@ -56,6 +59,10 @@ export default function MovieDetail() {
     }
   };
 
+  if (!isValidId) {
+    return <Layout><div className="container py-20 text-center">Invalid movie ID</div></Layout>;
+  }
+
   if (isLoading) {
     return (
       <Layout>
@@ -66,7 +73,7 @@ export default function MovieDetail() {
     );
   }
 
-  if (!movie) return <Layout><div className="container py-20 text-center">Movie not found</div></Layout>;
+  if (error || !movie) return <Layout><div className="container py-20 text-center">Movie not found</div></Layout>;
 
   const trailer = movie.videos?.results.find(v => v.type === "Trailer" && v.site === "YouTube");
   const director = movie.credits?.crew.find(c => c.job === "Director");
