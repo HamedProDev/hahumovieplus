@@ -9,7 +9,7 @@ const categories = [
   { name: "Thriller", icon: Film, count: 178, gradient: "bg-gradient-thriller" },
   { name: "Romance", icon: Heart, count: 203, gradient: "bg-gradient-romance" },
   { name: "Sci-Fi", icon: Rocket, count: 134, gradient: "bg-gradient-scifi" },
-  { name: "Documentary", icon: BookOpen, count: 98, gradient: "bg-gradient-documentary" },
+  { name: "factual", icon: BookOpen, count: 98, gradient: "bg-gradient-documentary" },
 ];
 
 export function CategorySection() {
