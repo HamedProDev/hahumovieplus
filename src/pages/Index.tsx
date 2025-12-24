@@ -1,13 +1,60 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { tmdb } from "@/lib/tmdb";
+import { Layout } from "@/components/Layout";
+import { HeroSection } from "@/components/HeroSection";
+import { MovieRow } from "@/components/MovieRow";
 
 const Index = () => {
+  const { data: trending, isLoading: trendingLoading } = useQuery({
+    queryKey: ["movies", "trending"],
+    queryFn: () => tmdb.getTrending(),
+  });
+
+  const { data: popular, isLoading: popularLoading } = useQuery({
+    queryKey: ["movies", "popular"],
+    queryFn: () => tmdb.getPopular(),
+  });
+
+  const { data: topRated, isLoading: topRatedLoading } = useQuery({
+    queryKey: ["movies", "top_rated"],
+    queryFn: () => tmdb.getTopRated(),
+  });
+
+  const { data: upcoming, isLoading: upcomingLoading } = useQuery({
+    queryKey: ["movies", "upcoming"],
+    queryFn: () => tmdb.getUpcoming(),
+  });
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <Layout>
+      <div className="-mt-16 lg:-mt-20">
+        <HeroSection movies={trending?.results || []} />
       </div>
-    </div>
+      
+      <div className="container mx-auto">
+        <MovieRow
+          title="🔥 Trending This Week"
+          movies={trending?.results || []}
+          isLoading={trendingLoading}
+        />
+        <MovieRow
+          title="🎬 Popular Movies"
+          movies={popular?.results || []}
+          isLoading={popularLoading}
+        />
+        <MovieRow
+          title="⭐ Top Rated"
+          movies={topRated?.results || []}
+          isLoading={topRatedLoading}
+        />
+        <MovieRow
+          title="🎯 Coming Soon"
+          movies={upcoming?.results || []}
+          isLoading={upcomingLoading}
+        />
+      </div>
+    </Layout>
   );
 };
 
