@@ -216,12 +216,13 @@ export function Navbar() {
                 </Link>
               )}
               {!user && (
-                <div className="flex gap-2 pt-4 border-t border-border/50">
+                <div className="flex gap-2 pt-4 border-t border-border/50">{/*
                   <Button variant="ghost" asChild className="flex-1">
                     <Link to="/auth" onClick={() => setIsMobileMenuOpen(false)}>
                       Sign In
                     </Link>
-                  </Button>
+                  </Button> */}
+                  <h1>Developed by <a href="https://hahupro.vercel.app" target="_blank" style={{textDecoration:'underline'}}>Hamed Hussein</a></h1>
                   <Button asChild className="flex-1 bg-primary text-primary-foreground">
                     <Link to="/auth" onClick={() => setIsMobileMenuOpen(false)}>
                       Sign In

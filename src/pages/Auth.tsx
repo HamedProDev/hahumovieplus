@@ -171,7 +171,7 @@ export default function Auth() {
                   <Input
                     id="email"
                     type="email"
-                    placeholder="you@example.com"
+                    placeholder="hamed@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="pl-10 bg-secondary/50"
@@ -243,7 +243,7 @@ export default function Auth() {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="you@example.com"
+                  placeholder="hamed@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-10 bg-secondary/50"
