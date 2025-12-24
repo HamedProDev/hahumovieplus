@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { tmdb } from "@/lib/tmdb";
 import { Layout } from "@/components/Layout";
 import { HeroSection } from "@/components/HeroSection";
 import { MovieRow } from "@/components/MovieRow";
+import { CategorySection } from "@/components/CategorySection";
+import { CountrySection } from "@/components/CountrySection";
+import { Newsletter } from "@/components/Newsletter";
 
 const Index = () => {
   const { data: trending, isLoading: trendingLoading } = useQuery({
@@ -32,6 +34,10 @@ const Index = () => {
         <HeroSection movies={trending?.results || []} />
       </div>
       
+      <CategorySection />
+      
+      <CountrySection />
+      
       <div className="container mx-auto">
         <MovieRow
           title="🔥 Trending This Week"
@@ -54,6 +60,8 @@ const Index = () => {
           isLoading={upcomingLoading}
         />
       </div>
+      
+      <Newsletter />
     </Layout>
   );
 };

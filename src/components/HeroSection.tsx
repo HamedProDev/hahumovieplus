@@ -60,56 +60,45 @@ export function HeroSection({ movies }: HeroSectionProps) {
           }`}
         >
           <div className="flex items-center gap-4 mb-4">
-            <span className="px-3 py-1 rounded-full bg-primary/20 text-primary text-sm font-medium border border-primary/30">
-              🔥 Trending Now
-            </span>
             <div className="flex items-center gap-1 text-muted-foreground">
               <Star className="h-4 w-4 text-primary fill-primary" />
               <span className="font-medium">{currentMovie.vote_average.toFixed(1)}</span>
             </div>
           </div>
 
-          <h1 className="text-4xl lg:text-6xl xl:text-7xl font-display font-bold mb-4 leading-tight">
-            {currentMovie.title}
+          <p className="text-sm uppercase tracking-widest text-muted-foreground mb-2">
+            WELCOME TO
+          </p>
+          <h1 className="text-4xl lg:text-6xl xl:text-7xl font-display font-bold mb-2 leading-tight">
+            <span className="text-foreground">HAHU </span>
+            <span className="text-gradient-purple">MOVIE+</span>
           </h1>
 
-          <p className="text-lg text-foreground/80 mb-6 line-clamp-3 max-w-xl">
-            {currentMovie.overview}
-          </p>
 
-          <div className="flex items-center gap-4 mb-8 text-muted-foreground">
-            <span>{currentMovie.release_date?.split("-")[0]}</span>
-            {currentMovie.runtime && (
-              <>
-                <span>•</span>
-                <div className="flex items-center gap-1">
-                  <Clock className="h-4 w-4" />
-                  <span>{Math.floor(currentMovie.runtime / 60)}h {currentMovie.runtime % 60}m</span>
-                </div>
-              </>
-            )}
-          </div>
+          <p className="text-base lg:text-lg text-foreground/80 mb-6 max-w-xl">
+            Stream thousands of movies from Hollywood, Bollywood, Nollywood, and more. Experience cinema like never before with HAHU Movie Plus.
+          </p>
 
           <div className="flex flex-wrap items-center gap-4">
             <Button
               asChild
               size="lg"
-              className="bg-gradient-gold text-primary-foreground hover:opacity-90 text-lg px-8 animate-pulse-glow"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8"
             >
               <Link to={`/movie/${currentMovie.id}`}>
                 <Play className="h-5 w-5 mr-2 fill-current" />
-                Watch Now
+                WATCH NOW
               </Link>
             </Button>
             <Button
               asChild
               size="lg"
-              variant="secondary"
-              className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-lg px-8"
+              variant="outline"
+              className="border-border/50 bg-transparent hover:bg-white/10 text-lg px-8"
             >
               <Link to={`/movie/${currentMovie.id}`}>
-                <Info className="h-5 w-5 mr-2" />
-                More Info
+                <span className="mr-2">+</span>
+                Watch Trailer
               </Link>
             </Button>
           </div>
