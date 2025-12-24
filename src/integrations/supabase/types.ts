@@ -14,7 +14,96 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string
+          full_name: string | null
+          id: string
+          is_admin: boolean
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email: string
+          full_name?: string | null
+          id: string
+          is_admin?: boolean
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string | null
+          id?: string
+          is_admin?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      watch_history: {
+        Row: {
+          id: string
+          movie_id: number
+          movie_poster: string | null
+          movie_title: string
+          progress_seconds: number | null
+          user_id: string
+          watched_at: string
+        }
+        Insert: {
+          id?: string
+          movie_id: number
+          movie_poster?: string | null
+          movie_title: string
+          progress_seconds?: number | null
+          user_id: string
+          watched_at?: string
+        }
+        Update: {
+          id?: string
+          movie_id?: number
+          movie_poster?: string | null
+          movie_title?: string
+          progress_seconds?: number | null
+          user_id?: string
+          watched_at?: string
+        }
+        Relationships: []
+      }
+      watchlist: {
+        Row: {
+          added_at: string
+          id: string
+          movie_id: number
+          movie_poster: string | null
+          movie_rating: number | null
+          movie_title: string
+          user_id: string
+        }
+        Insert: {
+          added_at?: string
+          id?: string
+          movie_id: number
+          movie_poster?: string | null
+          movie_rating?: number | null
+          movie_title: string
+          user_id: string
+        }
+        Update: {
+          added_at?: string
+          id?: string
+          movie_id?: number
+          movie_poster?: string | null
+          movie_rating?: number | null
+          movie_title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
